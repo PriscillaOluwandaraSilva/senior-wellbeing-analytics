@@ -2,7 +2,7 @@
 
 a person-centered decision matrix built with data analytics for choosing which programs actually earn the resources they're given in for profit social enterprises.
 
-Social enterprises account for a large umber of a lack of productivity and profitability based on the organization's goals in alignment with profitability, they face a real constraint: limited staff, limited time, in addition to already limited profit and resources — spending those resources on the wrong programming, not because they cannot choose between options, but rather because the programs get built around precedent and assumption instead of the people they're meant to serve. This isn't a data problem. It's a broken decision system: organizations choose confidently, and choose wrong, because the input  feeding that decision was never built around the person on the receiving end.
+Social enterprises account for a large umber of a lack of productivity and profitability based on the organization's goals in alignment with profitability, they face a real constraint: limited staff, limited time, in addition to already limited profit and resources — spending those resources on the wrong programming, not because they cannot choose between options, but rather because the programs get built around precedent and assumption instead of the people they're meant to serve. This isn't a data problem. It's a broken decision system: organizations choose confidently, and choose wrong, because the input feeding that decision was never built around the person on the receiving end.
 
 The deeper issue is how "impact" itself gets defined. A program can be genuinely beneficial to someone's wellbeing in the long run and still fail completely — because if it isn't something a senior actually wants to engage with, the benefit never happens. Wellbeing and engagement have to be measured together, or "impact" is just a story an organization tells itself. That's what makes this human-centered, not just data-driven: it isn't about feeding more data into the same broken system — it's about building a system-centered, person-centered method for choosing which programs actually earn the resources they're given, balancing profitability with purpose and real reach.
 
@@ -12,34 +12,25 @@ This mission statement was drafted with assistance from AI (Claude, Anthropic), 
 
 ## Repository Structure
 
+```
 senior-wellbeing-analytics/
 ├── data/
-│   ├── brfss/
-│   │   ├── raw/          # untouched BRFSS extracts as downloaded
-│   │   └── processed/    # cleaned, module-filtered BRFSS data
-│   └── yelp/
-│       ├── raw/          # untouched Yelp Open Dataset extracts
-│       └── processed/    # cleaned, category-filtered, sentiment-scored reviews
+│   └── raw/               # untouched CQC source files, with provenance README
 ├── notebooks/             # exploratory analysis
 ├── src/
-│   ├── etl/               # extraction and transformation scripts
-│   ├── models/
-│   │   ├── diagnostic_brfss/      # regression / Random Forest feature-importance analysis
-│   │   └── diagnostic_sentiment/  # sentiment analysis on Yelp review text
-│   └── prescriptive/      # combines both diagnostic outputs into program-type recommendations
-├── dashboards/             # Power BI files
-├── docs/                   # vision document, AI disclosure, references, diagrams
+│   └── etl/               # pipeline DAG, anonymization check, privacy audit logging
+├── docs/                  # governance framework, GX validation suite, bias detection report, audit log, illustrative simulation
 ├── README.md
 └── requirements.txt
 ```
 
-**Why two parallel diagnostic folders:** BRFSS (structured survey data) and Yelp reviews (unstructured text) are analyzed with different techniques and are never merged into a single dataset — there is no shared identifier linking a BRFSS respondent to a Yelp reviewer. Both diagnostic outputs feed into `src/prescriptive/`, which is the layer that actually produces the program-type ranking used to guide resource allocation.
+**Note on repository evolution:** the structure above reflects Module 3's implemented pipeline. Module 1-2 planning explored CDC BRFSS and Yelp Open Dataset as potential sources (see prior commit history and the Vision Document); the project's Module 3 dataset ultimately pivoted to UK Care Quality Commission (CQC) data as a proof-of-concept, given data-access constraints on Canadian/Alberta-specific senior programming data within the project timeline. See `docs/` for the full rationale.
 
 ## Data Sources
 
-- **CDC BRFSS** — Behavioral Risk Factor Surveillance System, cdc.gov/brfss. Real, non-synthetic, publicly downloadable.
-- **Yelp Open Dataset** — filtered to health, wellness, and senior-service categories. Real, non-synthetic, publicly downloadable at business.yelp.com/data/resources/open-dataset.
-- Supporting literature (not modeling data): National Institute on Ageing's Ageing in Canada Survey, and SHARE (Survey of Health, Ageing and Retirement in Europe), cited for context — SHARE's raw data is not used directly in this project due to its scientific-use-only, non-commercial licensing terms.
+- **CQC (Care Quality Commission)** — Care directory with ratings, cqc.gov.uk. Real, non-synthetic, publicly downloadable. Used as the Module 3 proof-of-concept dataset; the pipeline architecture is designed to transfer to Amari Eden's own program data once collected.
+- Supporting literature (not modeling data): Towers et al. (2021) MiCareHQ study on CQC ratings and quality of life; Bath and North East Somerset Council's CQC domain interpretation.
+- Prior candidate sources evaluated but not used in the final pipeline: CDC BRFSS, Yelp Open Dataset, CIHI, CMS Nursing Home Compare, NCI-AD, UCI wearable sensor data — see AI Disclosure Form for the evaluation process.
 
 ## Setup
 
@@ -49,7 +40,7 @@ cd senior-wellbeing-analytics
 pip install -r requirements.txt
 ```
 
-Raw data files are not included in this repository (see `.gitignore`) and must be downloaded separately from the sources listed above into their respective `data/*/raw/` folders.
+Large raw files exceeding GitHub's 25MB limit are stored as filtered extracts in `data/raw/`, with full provenance and re-download instructions in `data/raw/README.md`.
 
 ## Usage & Reuse
 
@@ -57,4 +48,4 @@ This repository is shared publicly for academic transparency and portfolio purpo
 
 ## Project Status
 
-Built as part of BAN6800's module sequence: Vision Document (Module 1) → Project Overview & Planning (Module 2, current state) → Data Pipeline (Module 3) → Predictive Modeling (Module 4) → Stakeholder Dashboard (Module 5) → Deployment (Module 6) → Final Integrated Project.
+Built as part of BAN6800's module sequence: Vision Document (Module 1) → Project Overview & Planning (Module 2) → Data Pipeline (Module 3, current state) → Predictive Modeling (Module 4) → Stakeholder Dashboard (Module 5) → Deployment (Module 6) → Final Integrated Project.
