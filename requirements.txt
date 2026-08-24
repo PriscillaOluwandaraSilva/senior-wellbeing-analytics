@@ -12,3 +12,8 @@ google-cloud-bigquery>=3.19.0
 db-dtypes>=1.2.0
 python-dotenv>=1.0.0
 jupyter>=1.0.0
+
+# BAN6800 Module 3 — data pipeline dependencies (added)
+great_expectations==1.21.0
+fairlearn==0.14.0
+apache-airflow==3.3.1
