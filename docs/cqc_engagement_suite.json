@@ -1,0 +1,67 @@
+{
+  "expectations": [
+    {
+      "id": "a134f614-1ac8-4a7f-ab5c-d1993de9c339",
+      "kwargs": {
+        "column": "engagement_score",
+        "value_set": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_be_in_set"
+    },
+    {
+      "id": "2bb0f0fd-eddc-42ea-9f9f-e0de09708e6e",
+      "kwargs": {
+        "column": "Location ID"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_not_be_null"
+    },
+    {
+      "id": "76139a28-60f4-446d-b684-08f035e83d73",
+      "kwargs": {
+        "column": "Location ID"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_be_unique"
+    },
+    {
+      "id": "b8504eec-1028-4e98-a0e9-30f0c66ee450",
+      "kwargs": {
+        "min_value": 5000
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_table_row_count_to_be_between"
+    },
+    {
+      "id": "caf96ae5-c9ce-4071-95e5-0f3e272b1bc5",
+      "kwargs": {
+        "column": "Latest Rating",
+        "value_set": [
+          "Outstanding",
+          "Good",
+          "Requires improvement",
+          "Inadequate"
+        ]
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_be_in_set"
+    }
+  ],
+  "id": "aba73128-b580-4b63-a3cc-1888b042d150",
+  "meta": {
+    "great_expectations_version": "1.21.0"
+  },
+  "name": "cqc_engagement_suite",
+  "notes": null
+}
