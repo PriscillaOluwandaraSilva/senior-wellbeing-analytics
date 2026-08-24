@@ -1,0 +1,28 @@
+{
+  "fairlearn_version": "0.14.0",
+  "metric_checked": "mean engagement_score (1-4 scale)",
+  "by_region": {
+    "per_group": {
+      "East": 2.9682646860229576,
+      "East Midlands": 2.9829250185597624,
+      "London": 2.985738255033557,
+      "North East": 3.041726618705036,
+      "North West": 2.9698899826288363,
+      "South East": 3.001152959262106,
+      "South West": 3.035958904109589,
+      "West Midlands": 2.9665792922673657,
+      "Yorkshire & Humberside": 2.9617365710080943
+    },
+    "overall": 2.9890454976995544,
+    "difference": 0.07999004769694151,
+    "ratio": 0.9737024204591418
+  },
+  "by_provider_size": {
+    "per_group": {
+      "Large chain (10+ homes)": 3.0066172578083643,
+      "Small/independent (<10 homes)": 2.982349974785678
+    },
+    "difference": 0.024267283022686215,
+    "ratio": 0.9919287089303892
+  }
+}
