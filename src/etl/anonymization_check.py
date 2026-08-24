@@ -18,7 +18,7 @@ email_matches = {}
 for col in df.columns:
     matches = df[col].astype(str).str.contains(r'[\w\.-]+@[\w\.-]+', regex=True, na=False)
     if matches.any():
-        email_matches[col] = df[col][matches].head(3).tolist()
+        email_matches[col] = df[col][matches].tolist()
 
 phone_found = df.astype(str).apply(
     lambda c: c.str.contains(r'\b0\d{9,10}\b', regex=True, na=False)
