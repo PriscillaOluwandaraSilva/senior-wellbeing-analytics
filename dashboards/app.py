@@ -1,3 +1,4 @@
+
 """
 Stakeholder Dashboard — CQC Engagement Prediction Model
 Module 5, BAN6800
@@ -12,19 +13,25 @@ import numpy as np
 import joblib
 import plotly.express as px
 import plotly.graph_objects as go
+import os
 
 st.set_page_config(page_title="Amari Eden Engagement Insights", layout="wide")
+
+# Resolve all file paths relative to this script's own location, not the
+# working directory Streamlit happens to launch from - this is what makes
+# the app work identically whether run locally or on Streamlit Cloud.
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # ---------- Load model and data ----------
 @st.cache_resource
 def load_model():
-    return joblib.load("random_forest_v2.pkl")
+    return joblib.load(os.path.join(BASE_DIR, "random_forest_v2.pkl"))
 
 @st.cache_data
 def load_data():
-    df = pd.read_csv("model_dataset_v2.csv")
-    X_test = pd.read_csv("X_test_v2.csv")
-    y_test = pd.read_csv("y_test_v2.csv").squeeze()
+    df = pd.read_csv(os.path.join(BASE_DIR, "model_dataset_v2.csv"))
+    X_test = pd.read_csv(os.path.join(BASE_DIR, "X_test_v2.csv"))
+    y_test = pd.read_csv(os.path.join(BASE_DIR, "y_test_v2.csv")).squeeze()
     return df, X_test, y_test
 
 model = load_model()
