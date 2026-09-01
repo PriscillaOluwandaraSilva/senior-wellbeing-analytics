@@ -10,6 +10,13 @@ This project, anchored by Amari Eden Living and Programs, exists to build that m
 
 This mission statement was drafted with assistance from AI (Claude, Anthropic), synthesized directly from the author's own reasoning and language developed across extended discussion during this project's planning — see the AI Disclosure Form for the full account of how AI was used throughout this project.
 
+## Live Deployments
+
+- **Stakeholder Dashboard:** https://senior-wellbeing-analytics-kwppqd6woxnezaznmga2z8.streamlit.app/
+- **Prediction API (interactive docs):** https://analytics-for-social-enterprises.onrender.com/docs#/default/predict_predict_post
+
+The API's free-tier hosting spins down after periods of inactivity; the first request after idle time may take a few seconds to respond while it wakes up.
+
 ## Repository Structure
 
 ```
@@ -17,19 +24,27 @@ senior-wellbeing-analytics/
 ├── data/
 │   └── raw/               # untouched CQC source files, with provenance README
 ├── notebooks/             # exploratory analysis
+├── dashboards/             # stakeholder dashboard app, model, and data
 ├── src/
-│   └── etl/               # pipeline DAG, anonymization check, privacy audit logging
-├── docs/                  # governance framework, GX validation suite, bias detection report, audit log, illustrative simulation
+│   ├── etl/                # pipeline DAG, anonymization check, privacy audit logging
+│   ├── tests/               # automated test suite (CI/CD)
+│   ├── app_v2.py            # FastAPI prediction service
+│   └── api_demo.py          # scripted demonstration of the API
+├── monitoring/              # monitoring dashboard (performance & fairness over time)
+├── docs/                   # governance framework, GX validation suite, bias detection
+│                           # report, audit log, Model Card, Ethical AI Framework
+├── .github/workflows/       # CI/CD pipeline (GitHub Actions)
+├── docker-compose.yml       # multi-container orchestration (API, dashboard, monitoring)
 ├── README.md
 └── requirements.txt
 ```
 
-**Note on repository evolution:** the structure above reflects Module 3's implemented pipeline. Module 1-2 planning explored CDC BRFSS and Yelp Open Dataset as potential sources (see prior commit history and the Vision Document); the project's Module 3 dataset ultimately pivoted to UK Care Quality Commission (CQC) data as a proof-of-concept, given data-access constraints on Canadian/Alberta-specific senior programming data within the project timeline. See `docs/` for the full rationale.
+**Note on repository evolution:** Module 1-2 planning explored CDC BRFSS and Yelp Open Dataset as potential sources (see prior commit history and the Vision Document); Module 3 pivoted to UK Care Quality Commission (CQC) data as a proof-of-concept, given data-access constraints on Canadian/Alberta-specific senior programming data within the project timeline. Module 4 further reframed the predictive model from administrative facility attributes to CQC quality-of-care domain scores, improving both accuracy and fairness. See `docs/` and the Integrated Report for the full rationale.
 
 ## Data Sources
 
-- **CQC (Care Quality Commission)** — Care directory with ratings, cqc.gov.uk. Real, non-synthetic, publicly downloadable. Used as the Module 3 proof-of-concept dataset; the pipeline architecture is designed to transfer to Amari Eden's own program data once collected.
-- Supporting literature (not modeling data): Towers et al. (2021) MiCareHQ study on CQC ratings and quality of life; Bath and North East Somerset Council's CQC domain interpretation.
+- **CQC (Care Quality Commission)** — Care directory with ratings, cqc.gov.uk. Real, non-synthetic, publicly downloadable. Used as the proof-of-concept dataset throughout; the pipeline and modeling architecture are designed to transfer to Amari Eden's own program data once collected.
+- Supporting literature (not modeling data): Towers et al. (2021) MiCareHQ study on CQC ratings and quality of life; Bath and North East Somerset Council's CQC domain interpretation; Tanuwidjaja (2023) on ML model deployment for data analysts; Odegua (2020) on applied machine learning, consulted while reviewing alternative algorithms (KNN).
 - Prior candidate sources evaluated but not used in the final pipeline: CDC BRFSS, Yelp Open Dataset, CIHI, CMS Nursing Home Compare, NCI-AD, UCI wearable sensor data — see AI Disclosure Form for the evaluation process.
 
 ## Setup
@@ -42,10 +57,26 @@ pip install -r requirements.txt
 
 Large raw files exceeding GitHub's 25MB limit are stored as filtered extracts in `data/raw/`, with full provenance and re-download instructions in `data/raw/README.md`.
 
+### Running locally with Docker Compose
+
+```bash
+docker compose up --build
+```
+
+This starts three services: the prediction API (port 8000), the stakeholder dashboard (port 8501), and the monitoring dashboard (port 8502).
+
+### Running the test suite
+
+```bash
+cd src
+pip install -r requirements.txt pytest httpx
+pytest tests/ -v
+```
+
 ## Usage & Reuse
 
 This repository is shared publicly for academic transparency and portfolio purposes. Viewing and running the code locally is permitted. Reuse, modification, or redistribution is not authorized without the author's permission — no open-source license is attached, and all rights are reserved by default.
 
 ## Project Status
 
-Built as part of BAN6800's module sequence: Vision Document (Module 1) → Project Overview & Planning (Module 2) → Data Pipeline (Module 3, current state) → Predictive Modeling (Module 4) → Stakeholder Dashboard (Module 5) → Deployment (Module 6) → Final Integrated Project.
+Built as part of BAN6800's module sequence: Vision Document (Module 1) → Project Overview & Planning (Module 2) → Data Pipeline (Module 3) → Predictive Modeling & XAI (Module 4) → Stakeholder Dashboard (Module 5) → Final Integrated Project with CI/CD, containerized deployment, and monitoring (Module 6, current state).
