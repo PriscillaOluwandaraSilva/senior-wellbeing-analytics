@@ -1,0 +1,48 @@
+version: "3.9"
+
+# Docker Compose — CQC Engagement Prediction System
+# BAN6800 Final Project
+#
+# Three services, matching the ACTUAL repository folder structure:
+# src/ (API), dashboards/ (stakeholder dashboard), monitoring/ (new).
+# Run with: docker compose up --build
+#
+# NOTE: written and syntax-reviewed, but not executed end-to-end, since
+# Docker is unavailable in the authoring environment. Verify locally
+# with `docker compose config` before relying on it in production.
+
+services:
+  api:
+    build:
+      context: ./src
+    container_name: cqc_api
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python3", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/')"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  dashboard:
+    build:
+      context: ./dashboards
+    container_name: cqc_dashboard
+    ports:
+      - "8501:8501"
+    restart: unless-stopped
+    depends_on:
+      - api
+
+  monitoring:
+    build:
+      context: ./monitoring
+    container_name: cqc_monitoring
+    ports:
+      - "8502:8502"
+    restart: unless-stopped
+
+networks:
+  default:
+    name: cqc-engagement-network
