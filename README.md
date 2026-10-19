@@ -1,8 +1,8 @@
 # senior-wellbeing-analytics
 
-a person-centered decision matrix built with data analytics for choosing which programs actually earn the resources they're given in for profit social enterprises.
+a person-centered decision matrix built with data analytics for choosing which programs actually earn the resources they're given in for-profit social enterprises.
 
-Social enterprises account for a large umber of a lack of productivity and profitability based on the organization's goals in alignment with profitability, they face a real constraint: limited staff, limited time, in addition to already limited profit and resources — spending those resources on the wrong programming, not because they cannot choose between options, but rather because the programs get built around precedent and assumption instead of the people they're meant to serve. This isn't a data problem. It's a broken decision system: organizations choose confidently, and choose wrong, because the input feeding that decision was never built around the person on the receiving end.
+Social enterprises account for a large number of a lack of productivity and profitability based on the organization's goals in alignment with profitability, they face a real constraint: limited staff, limited time, in addition to already limited profit and resources — spending those resources on the wrong programming, not because they cannot choose between options, but rather because the programs get built around precedent and assumption instead of the people they're meant to serve. This isn't a data problem. It's a broken decision system: organizations choose confidently, and choose wrong, because the input feeding that decision was never built around the person on the receiving end.
 
 The deeper issue is how "impact" itself gets defined. A program can be genuinely beneficial to someone's wellbeing in the long run and still fail completely — because if it isn't something a senior actually wants to engage with, the benefit never happens. Wellbeing and engagement have to be measured together, or "impact" is just a story an organization tells itself. That's what makes this human-centered, not just data-driven: it isn't about feeding more data into the same broken system — it's about building a system-centered, person-centered method for choosing which programs actually earn the resources they're given, balancing profitability with purpose and real reach.
 
@@ -79,4 +79,4 @@ This repository is shared publicly for academic transparency and portfolio purpo
 
 ## Project Status
 
-Built as part of BAN6800's module sequence: Vision Document (Module 1) → Project Overview & Planning (Module 2) → Data Pipeline (Module 3) → Predictive Modeling & XAI (Module 4) → Stakeholder Dashboard (Module 5) → Final Integrated Project with CI/CD, containerized deployment, and monitoring (Module 6, current state).
+Built for Amari Eden Living: Vision Document (Module 1) → Project Overview & Planning (Module 2) → Data Pipeline (Module 3) → Predictive Modeling & XAI (Module 4) → Stakeholder Dashboard (Module 5) → Final Integrated Project with CI/CD, containerized deployment, and monitoring (Module 6, current state).
